@@ -2,8 +2,8 @@
 #define GAMETYPE_H
 
 enum GameType {
-    Player,
-    Monster,
+    Ally,
+    Enemy,
     Item,
 };
 

@@ -9,11 +9,17 @@ public:
 
     ~Handler();
 
-    void run(sf::RenderWindow& renderWindow);
+    void render(sf::RenderWindow& renderWindow);
+
+    void tick();
 
     GameObject* addObject(GameObject* obj);
 
     void removeObject(GameObject* obj);
+
+    GameObject* getPlayer();
+
+    std::list<GameObject*> getAllObjects();
 
 private:
 

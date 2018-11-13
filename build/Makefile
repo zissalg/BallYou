@@ -56,14 +56,30 @@ SOURCES       = ../src/main.cpp \
 		../src/Handler.cpp \
 		../src/GameType.cpp \
 		../src/Include.cpp \
-		../src/TextureManager.cpp 
+		../src/TextureManager.cpp \
+		../src/Player.cpp \
+		../src/KeyInput.cpp \
+		../src/BasicEnemy.cpp \
+		../src/Detector.cpp \
+		../src/Statistics.cpp \
+		../src/Text.cpp \
+		../src/FontManager.cpp \
+		../src/Wave.cpp 
 OBJECTS       = main.o \
 		Window.o \
 		GameObject.o \
 		Handler.o \
 		GameType.o \
 		Include.o \
-		TextureManager.o
+		TextureManager.o \
+		Player.o \
+		KeyInput.o \
+		BasicEnemy.o \
+		Detector.o \
+		Statistics.o \
+		Text.o \
+		FontManager.o \
+		Wave.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -137,13 +153,29 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		src/Handler.h \
 		src/GameType.h \
 		src/Include.h \
-		src/TextureManager.h ../src/main.cpp \
+		src/TextureManager.h \
+		src/Player.h \
+		src/KeyInput.h \
+		src/BasicEnemy.h \
+		src/Detector.h \
+		src/Statistics.h \
+		src/Text.h \
+		src/FontManager.h \
+		src/Wave.h ../src/main.cpp \
 		../src/Window.cpp \
 		../src/GameObject.cpp \
 		../src/Handler.cpp \
 		../src/GameType.cpp \
 		../src/Include.cpp \
-		../src/TextureManager.cpp
+		../src/TextureManager.cpp \
+		../src/Player.cpp \
+		../src/KeyInput.cpp \
+		../src/BasicEnemy.cpp \
+		../src/Detector.cpp \
+		../src/Statistics.cpp \
+		../src/Text.cpp \
+		../src/FontManager.cpp \
+		../src/Wave.cpp
 QMAKE_TARGET  = BallYou
 DESTDIR       = 
 TARGET        = BallYou
@@ -339,14 +371,27 @@ compiler_clean:
 
 main.o: ../src/main.cpp ../src/Window.h \
 		../src/Include.h \
+		../src/KeyInput.h \
+		../src/Handler.h \
+		../src/GameObject.h \
+		../src/GameType.h \
+		../src/TextureManager.h \
+		../src/Player.h \
+		../src/BasicEnemy.h \
+		../src/Detector.h \
+		../src/Statistics.h \
+		../src/Text.h \
+		../src/FontManager.h \
+		../src/Wave.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../src/main.cpp
+
+Window.o: ../src/Window.cpp ../src/Window.h \
+		../src/Include.h \
+		../src/KeyInput.h \
 		../src/Handler.h \
 		../src/GameObject.h \
 		../src/GameType.h \
 		../src/TextureManager.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../src/main.cpp
-
-Window.o: ../src/Window.cpp ../src/Window.h \
-		../src/Include.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Window.o ../src/Window.cpp
 
 GameObject.o: ../src/GameObject.cpp ../src/GameObject.h \
@@ -371,6 +416,67 @@ Include.o: ../src/Include.cpp ../src/Include.h
 TextureManager.o: ../src/TextureManager.cpp ../src/TextureManager.h \
 		../src/Include.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o TextureManager.o ../src/TextureManager.cpp
+
+Player.o: ../src/Player.cpp ../src/Player.h \
+		../src/GameObject.h \
+		../src/Include.h \
+		../src/GameType.h \
+		../src/TextureManager.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Player.o ../src/Player.cpp
+
+KeyInput.o: ../src/KeyInput.cpp ../src/KeyInput.h \
+		../src/Include.h \
+		../src/Handler.h \
+		../src/GameObject.h \
+		../src/GameType.h \
+		../src/TextureManager.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o KeyInput.o ../src/KeyInput.cpp
+
+BasicEnemy.o: ../src/BasicEnemy.cpp ../src/BasicEnemy.h \
+		../src/GameObject.h \
+		../src/Include.h \
+		../src/GameType.h \
+		../src/TextureManager.h \
+		../src/Handler.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o BasicEnemy.o ../src/BasicEnemy.cpp
+
+Detector.o: ../src/Detector.cpp ../src/Detector.h \
+		../src/Handler.h \
+		../src/GameObject.h \
+		../src/Include.h \
+		../src/GameType.h \
+		../src/TextureManager.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Detector.o ../src/Detector.cpp
+
+Statistics.o: ../src/Statistics.cpp ../src/Statistics.h \
+		../src/Include.h \
+		../src/Text.h \
+		../src/GameObject.h \
+		../src/GameType.h \
+		../src/TextureManager.h \
+		../src/FontManager.h \
+		../src/Handler.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Statistics.o ../src/Statistics.cpp
+
+Text.o: ../src/Text.cpp ../src/Text.h \
+		../src/GameObject.h \
+		../src/Include.h \
+		../src/GameType.h \
+		../src/TextureManager.h \
+		../src/FontManager.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Text.o ../src/Text.cpp
+
+FontManager.o: ../src/FontManager.cpp ../src/FontManager.h \
+		../src/Include.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o FontManager.o ../src/FontManager.cpp
+
+Wave.o: ../src/Wave.cpp ../src/Wave.h \
+		../src/Include.h \
+		../src/Handler.h \
+		../src/GameObject.h \
+		../src/GameType.h \
+		../src/TextureManager.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Wave.o ../src/Wave.cpp
 
 ####### Install
 

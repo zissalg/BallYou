@@ -11,7 +11,15 @@ SOURCES += src/main.cpp \
     src/Handler.cpp \
     src/GameType.cpp \
     src/Include.cpp \
-    src/TextureManager.cpp
+    src/TextureManager.cpp \
+    src/Player.cpp \
+    src/KeyInput.cpp \
+    src/BasicEnemy.cpp \
+    src/Detector.cpp \
+    src/Statistics.cpp \
+    src/Text.cpp \
+    src/FontManager.cpp \
+    src/Wave.cpp
 
 HEADERS += \
     src/Window.h \
@@ -19,4 +27,12 @@ HEADERS += \
     src/Handler.h \
     src/GameType.h \
     src/Include.h \
-    src/TextureManager.h
+    src/TextureManager.h \
+    src/Player.h \
+    src/KeyInput.h \
+    src/BasicEnemy.h \
+    src/Detector.h \
+    src/Statistics.h \
+    src/Text.h \
+    src/FontManager.h \
+    src/Wave.h

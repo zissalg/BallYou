@@ -11,13 +11,17 @@ Handler::~Handler()
         delete obj;
 }
 
-void Handler::run(sf::RenderWindow& renderWindow)
+void Handler::tick()
 {
     for (auto obj : _objects)
-    {
-        obj->tick();
+        if (obj != nullptr)
+            obj->tick();
+}
+
+void Handler::render(sf::RenderWindow& renderWindow)
+{
+    for (auto obj : _objects)
         obj->render(renderWindow);
-    }
 }
 
 GameObject* Handler::addObject(GameObject *obj)
@@ -29,4 +33,18 @@ GameObject* Handler::addObject(GameObject *obj)
 void Handler::removeObject(GameObject *obj)
 {
     _objects.remove(obj);
+}
+
+GameObject* Handler::getPlayer()
+{
+    for (auto obj : _objects)
+        if (obj->type() == GameType::Ally)
+            return obj;
+
+    return nullptr;
+}
+
+std::list<GameObject*> Handler::getAllObjects()
+{
+    return _objects;
 }

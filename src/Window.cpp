@@ -11,6 +11,11 @@ Window::~Window()
 
 }
 
+void Window::setKeyInput(KeyInput *keyInput)
+{
+    _keyInput = keyInput;
+}
+
 void Window::begin()
 {
     sf::Event event;
@@ -20,6 +25,12 @@ void Window::begin()
         {
 
         case sf::Event::Closed: _renderWindow.close();
+            break;
+
+        case sf::Event::KeyPressed: _keyInput->keyPressed(event);
+            break;
+
+        case sf::Event::KeyReleased: _keyInput->keyReleased(event);
             break;
 
         default:
