@@ -2,7 +2,7 @@
 #define GAMETYPE_H
 
 enum GameType {
-    Ally,
+    You,
     Enemy,
     Item,
 };

@@ -14,6 +14,10 @@ Detector::~Detector()
 bool Detector::check()
 {
     GameObject* player = _handler->getPlayer();
+
+    if (player == nullptr)
+        return false;
+
     for (auto obj : _handler->getAllObjects())
         if (obj != player && player->isConflict(*obj))
             return true;

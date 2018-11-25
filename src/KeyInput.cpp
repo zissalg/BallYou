@@ -15,14 +15,18 @@ void KeyInput::keyPressed(sf::Event &event)
 {
     GameObject* player = _handler->getPlayer();
 
+    if (player == nullptr)
+        return;
+
     if (event.key.code == sf::Keyboard::A)
         player->setVelX(-5);
-    if (event.key.code == sf::Keyboard::D)
+    else if (event.key.code == sf::Keyboard::D)
         player->setVelX(+5);
-    if (event.key.code == sf::Keyboard::W)
+    else if (event.key.code == sf::Keyboard::W)
         player->setVelY(-5);
-    if (event.key.code == sf::Keyboard::S)
+    else if (event.key.code == sf::Keyboard::S)
         player->setVelY(+5);
+
 
 
 }
@@ -31,13 +35,20 @@ void KeyInput::keyReleased(sf::Event &event)
 {
     GameObject* player = _handler->getPlayer();
 
-    if (event.key.code == sf::Keyboard::A)
-        player->setVelX(0);
-    if (event.key.code == sf::Keyboard::D)
-        player->setVelX(0);
-    if (event.key.code == sf::Keyboard::W)
-        player->setVelY(0);
-    if (event.key.code == sf::Keyboard::S)
-        player->setVelY(0);
+    if (player == nullptr)
+        return;
+
+    sf::Vector2f vel = player->vel();
+
+    if (event.key.code == sf::Keyboard::A && vel.x == -5)
+        vel.x = 0;
+    if (event.key.code == sf::Keyboard::D && vel.x == +5)
+        vel.x = 0;
+    if (event.key.code == sf::Keyboard::W && vel.y == -5)
+        vel.y = 0;
+    if (event.key.code == sf::Keyboard::S && vel.y == +5)
+        vel.y = 0;
+
+    player->setVel(vel);
 
 }

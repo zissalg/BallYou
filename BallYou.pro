@@ -6,33 +6,37 @@ CONFIG -= qt
 LIBS += -lsfml-graphics -lsfml-window -lsfml-system
 
 SOURCES += src/main.cpp \
-    src/Window.cpp \
-    src/GameObject.cpp \
-    src/Handler.cpp \
-    src/GameType.cpp \
-    src/Include.cpp \
-    src/TextureManager.cpp \
-    src/Player.cpp \
-    src/KeyInput.cpp \
     src/BasicEnemy.cpp \
     src/Detector.cpp \
-    src/Statistics.cpp \
-    src/Text.cpp \
     src/FontManager.cpp \
-    src/Wave.cpp
+    src/GameObject.cpp \
+    src/GameType.cpp \
+    src/Handler.cpp \
+    src/Include.cpp \
+    src/KeyInput.cpp \
+    src/MouseInput.cpp \
+    src/Player.cpp \
+    src/TextureManager.cpp \
+    src/Window.cpp \
+    src/Widgets/Button.cpp \
+    src/Widgets/GameWidget.cpp \
+    src/Widgets/Menu.cpp \
+    src/Widgets/Text.cpp
 
 HEADERS += \
-    src/Window.h \
-    src/GameObject.h \
-    src/Handler.h \
-    src/GameType.h \
-    src/Include.h \
-    src/TextureManager.h \
-    src/Player.h \
-    src/KeyInput.h \
     src/BasicEnemy.h \
     src/Detector.h \
-    src/Statistics.h \
-    src/Text.h \
     src/FontManager.h \
-    src/Wave.h
+    src/GameObject.h \
+    src/GameType.h \
+    src/Handler.h \
+    src/Include.h \
+    src/KeyInput.h \
+    src/MouseInput.h \
+    src/Player.h \
+    src/TextureManager.h \
+    src/Window.h \
+    src/Widgets/Button.h \
+    src/Widgets/GameWidget.h \
+    src/Widgets/Menu.h \
+    src/Widgets/Text.h

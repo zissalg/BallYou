@@ -4,6 +4,12 @@ BasicEnemy::BasicEnemy(sf::Vector2f pos)
     : GameObject(GameType::Enemy, pos, sf::Vector2f(5.f, 5.f))
     , _sprite(TextureManager::instance().find("textures/basic_enemy.png"))
 {
+    if (rand() % 2)
+        _vel.x = -5.f;
+
+    if (rand() % 2)
+        _vel.y = -5.f;
+
 }
 
 BasicEnemy::~BasicEnemy()

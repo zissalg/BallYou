@@ -16,6 +16,11 @@ void Window::setKeyInput(KeyInput *keyInput)
     _keyInput = keyInput;
 }
 
+void Window::setMouseInput(MouseInput* mouseInput)
+{
+    _mouseInput = mouseInput;
+}
+
 void Window::begin()
 {
     sf::Event event;
@@ -31,6 +36,15 @@ void Window::begin()
             break;
 
         case sf::Event::KeyReleased: _keyInput->keyReleased(event);
+            break;
+
+        case sf::Event::MouseButtonPressed: _mouseInput->mouseClicked(event);
+            break;
+
+        case sf::Event::MouseButtonReleased: _mouseInput->mouseReleased(event);
+            break;
+
+        case sf::Event::MouseMoved: _mouseInput->mouseMoved(event);
             break;
 
         default:

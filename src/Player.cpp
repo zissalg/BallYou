@@ -1,7 +1,7 @@
 #include "Player.h"
 
 Player::Player(sf::Vector2f pos, sf::Vector2f vel)
-    : GameObject(GameType::Ally, pos, vel)
+    : GameObject(GameType::You, pos, vel)
     , _sprite(TextureManager::instance().find("textures/player.png"))
 {
 

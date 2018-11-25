@@ -3,23 +3,36 @@
 #include "Player.h"
 #include "BasicEnemy.h"
 #include "Detector.h"
-#include "Statistics.h"
-#include "Wave.h"
+#include "Widgets/Button.h"
+#include "Widgets/Menu.h"
 
 #define MAX_WAVE 3
 
 Handler mainHandler;
 Window mainWindow("Ball You", 800, 600);
-KeyInput mainKeyInput(&mainHandler);
 Detector mainDetector(&mainHandler);
-Statistics mainStatistics(&mainHandler);
-Wave mainWave(&mainHandler);
+KeyInput mainKeyInput(&mainHandler);
+MouseInput mainMouseInput(&mainHandler);
+Menu* mainMenu;
+sf::Sprite mainRect(TextureManager::instance().find("textures/rect.png"));
 
-bool mainRunning = true;
+bool mainRunning = false;
 
 void init();
 
 void loop();
+
+void run();
+
+void initMenu();
+
+void startCallback();
+
+void pauseCallback();
+
+void settingsCallback();
+
+void exitCallback();
 
 int main()
 {
@@ -33,9 +46,33 @@ void init()
     srand(time(nullptr));
 
     mainWindow.setKeyInput(&mainKeyInput);
-    mainHandler.addObject(new Player(sf::Vector2f(800 / 2 - 32, 600 / 2 - 32)));
+    mainWindow.setMouseInput(&mainMouseInput);
+    mainRect.setPosition(sf::Vector2f(800 - 64, 600 - 64));
 
-    mainWave.load("waves/wave" + std::to_string(mainStatistics.level()) + ".txt");
+    initMenu();
+}
+
+void run()
+{
+
+    mainHandler.tick();
+
+    GameObject* player = mainHandler.getPlayer();
+    if (player != nullptr)
+    {
+        if (player->position().x > (800 - 64) && player->position().y > (600 - 64))
+        {
+            mainHandler.addWidget(new Text("YOU WIN", sf::Vector2f(300, 200), 30));
+            mainRunning = false;
+        }
+    }
+
+    if (mainDetector.check())
+    {
+        mainHandler.addWidget(new Text("YOU LOSE", sf::Vector2f(300, 200), 30));
+        mainRunning = false;
+    }
+
 }
 
 void loop()
@@ -43,43 +80,56 @@ void loop()
     while (mainWindow.isOpen())
     {
         mainWindow.begin();
+        mainWindow.renderWindow().draw(mainRect);
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+            mainMenu->hide(false);
 
         if (mainRunning)
-        {
-
-            mainHandler.tick();
-
-            mainStatistics.increase();
-
-            if (mainDetector.check() || mainStatistics.nextWave())
-            {
-
-                if (mainStatistics.nextWave())
-                {
-                    mainWave.clean();
-
-                    if (mainStatistics.level() < MAX_WAVE)
-                    {
-                        mainStatistics.levelUp();
-                        mainWave.load("waves/wave" + std::to_string(mainStatistics.level()) + ".txt");
-                    } else
-                    {
-                        mainRunning = false;
-                        continue;
-                    }
-                }
-
-                mainStatistics.reset();
-                mainHandler.getPlayer()->setPosition(sf::Vector2f(800 / 2 - 32, 600 / 2 - 32));
-
-            }
-
-        }
+            run();
 
         mainHandler.render(mainWindow.renderWindow());
-        mainStatistics.render(mainWindow.renderWindow());
 
         mainWindow.end();
 
     }
+}
+
+void startCallback()
+{
+    mainRunning = true;
+    mainMenu->hide(true);
+
+    mainHandler.removeAllObjects();
+    mainHandler.addObject(new Player(sf::Vector2f(16, 16)));
+    for (uint j = 0; j < 10; ++j)
+        mainHandler.addObject(new BasicEnemy(sf::Vector2f((rand() % 700) + 50, (rand() % 500) + 50)));
+}
+
+void pauseCallback()
+{
+    mainRunning = !mainRunning;
+}
+
+void settingsCallback()
+{
+
+}
+
+void exitCallback()
+{
+    mainWindow.renderWindow().close();
+}
+
+void initMenu()
+{
+    mainMenu = (Menu*)mainHandler.addWidget(new Menu(sf::Vector2f(250.f, 200.f), 4));
+    mainMenu->setMsg("START", 0);
+    mainMenu->setMsg("PAUSE", 1);
+    mainMenu->setMsg("SETTINGS", 2);
+    mainMenu->setMsg("EXIT", 3);
+    mainMenu->connect(startCallback, 0);
+    mainMenu->connect(pauseCallback, 1);
+    mainMenu->connect(settingsCallback, 2);
+    mainMenu->connect(exitCallback, 3);
 }

@@ -3,6 +3,7 @@
 
 #include "Include.h"
 #include "KeyInput.h"
+#include "MouseInput.h"
 
 class Window {
 public:
@@ -11,6 +12,8 @@ public:
     ~Window();
 
     void setKeyInput(KeyInput* keyInput);
+
+    void setMouseInput(MouseInput* mouseInput);
 
     void begin();
 
@@ -23,6 +26,8 @@ public:
 private:
 
     KeyInput*        _keyInput;
+
+    MouseInput*      _mouseInput;
 
     sf::RenderWindow _renderWindow;
 };
